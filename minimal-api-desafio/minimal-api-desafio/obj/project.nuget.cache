@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UX8yUWpHdy4BoV57q3Nt8ksoLNQRbfpKmCKU6jIdz2uxnawbaPvWEOpo/IUVZytVe4MTxmb1P1cJec6F5QLKyA==",
+  "dgSpecHash": "jLpswlGWericgeA6zmrQuRd9j1SnYUnvVBKioXRCSVVoRMJAmDUSeXxtOqOY/FJ3Sn+AnEQ8GFh96axCHgRdig==",
   "success": true,
-  "projectFilePath": "c:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-api-dotnet7\\minimal-api-desafio\\minimal-api-desafio\\minimal-api-desafio.csproj",
+  "projectFilePath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-api-dotnet7\\minimal-api-desafio\\minimal-api-desafio\\minimal-api-desafio.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lucas\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.4\\microsoft.aspnetcore.openapi.7.0.4.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
