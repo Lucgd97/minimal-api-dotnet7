@@ -23,3 +23,15 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+#region Rotas utilizando Mininal API
+MapRoutes(app);
+
+void MapRoutes(WebApplication app)
+{
+    app.MapGet("/", () => new {Mensagem = "Bem vubdi a Api"});
+}
+
+#endregion
+
+
