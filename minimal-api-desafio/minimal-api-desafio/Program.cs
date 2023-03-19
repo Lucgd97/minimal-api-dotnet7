@@ -22,14 +22,29 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+MapRoutes(app);
+
 app.Run();
 
 #region Rotas utilizando Mininal API
-MapRoutes(app);
+
 
 void MapRoutes(WebApplication app)
 {
-    app.MapGet("/", () => new {Mensagem = "Bem vubdi a Api"});
+    app.MapGet("/", () => new {Mensagem = "Bem vindo a Api"}); // rota minima para api
+    app.MapGet("/recebe-parametro", (string nome) =>
+    {
+        nome = $""" 
+        Alterando parametro recebido {nome}
+        """;
+
+        var objetoDeRetorno = new {
+            ParametroPassado = nome,
+            Mensagem = "Muito bem alunos passamos um parametro por querystring"
+        };
+
+        return objetoDeRetorno;
+    });
 }
 
 #endregion
