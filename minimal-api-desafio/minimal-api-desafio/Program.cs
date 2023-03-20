@@ -28,12 +28,13 @@ app.Run();
 
 #region Rotas utilizando Mininal API
 
-
 void MapRoutes(WebApplication app)
 {
     app.MapGet("/", () => new {Mensagem = "Bem vindo a Api"}); // rota minima para api
-    app.MapGet("/recebe-parametro", (string nome) =>
+    app.MapGet("/recebe-parametro", (HttpRequest request, HttpResponse response, string? nome) =>
     {
+        response.StatusCode = 201;
+
         nome = $""" 
         Alterando parametro recebido {nome}
         """;
