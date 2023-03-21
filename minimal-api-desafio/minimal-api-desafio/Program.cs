@@ -30,10 +30,22 @@ app.Run();
 
 void MapRoutes(WebApplication app)
 {
-    app.MapGet("/", () => new {Mensagem = "Bem vindo a Api"}); // rota minima para api
+    app.MapGet("/", () => new {Mensagem = "Bem vindo a Api"})// rota minima para api
+    .Produces<dynamic>(StatusCodes.Status201Created)
+    .WithName("TesteRecebeParametro")
+    .WithTags("Testes"); 
+
+
     app.MapGet("/recebe-parametro", (HttpRequest request, HttpResponse response, string? nome) =>
     {
-        response.StatusCode = 201;
+
+        if(string.IsNullOrEmpty(nome))
+        {
+            return Results.BadRequest(new{
+                Mensagem = "Olha você não mandou uma informação importante, o nome é obrigatório"
+            });
+            
+        }
 
         nome = $""" 
         Alterando parametro recebido {nome}
@@ -44,8 +56,12 @@ void MapRoutes(WebApplication app)
             Mensagem = "Muito bem alunos passamos um parametro por querystring"
         };
 
-        return objetoDeRetorno;
-    });
+        return Results.Created($"/recebe-parametro/{objetoDeRetorno.ParametroPassado}", objetoDeRetorno);
+    })
+    .Produces<dynamic>(StatusCodes.Status201Created)
+    .Produces(StatusCodes.Status400BadRequest)
+    .WithName("TesteRecebeParametro")
+    .WithTags("Testes");
 }
 
 #endregion
