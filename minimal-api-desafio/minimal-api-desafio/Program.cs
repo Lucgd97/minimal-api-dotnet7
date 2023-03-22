@@ -24,6 +24,8 @@ app.MapControllers();
 
 MapRoutes(app);
 
+MapRoutesHTTPPost(app);
+
 app.Run();
 
 #region Rotas utilizando Mininal API
@@ -31,8 +33,8 @@ app.Run();
 void MapRoutes(WebApplication app)
 {
     app.MapGet("/", () => new {Mensagem = "Bem vindo a Api"})// rota minima para api
-    .Produces<dynamic>(StatusCodes.Status201Created)
-    .WithName("TesteRecebeParametro")
+    .Produces<dynamic>(StatusCodes.Status200OK)
+    .WithName("Home")
     .WithTags("Testes"); 
 
 
@@ -61,6 +63,17 @@ void MapRoutes(WebApplication app)
     .Produces<dynamic>(StatusCodes.Status201Created)
     .Produces(StatusCodes.Status400BadRequest)
     .WithName("TesteRecebeParametro")
+    .WithTags("Testes");
+}
+
+void MapRoutesHTTPPost(WebApplication app)
+{
+    app.MapPost("/clientes", () => 
+    {
+       return new {Mensagem = "Bem vindo a Api"};
+    })
+    .Produces<dynamic>(StatusCodes.Status200OK)
+    .WithName("Home")
     .WithTags("Testes");
 }
 
