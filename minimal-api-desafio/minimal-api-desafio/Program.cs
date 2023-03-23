@@ -1,3 +1,8 @@
+using Microsoft.AspNetCore.Mvc;
+using MinimalApiDesafio.ModelViews;
+using MinimalApiDesafio.Models;
+using MinimalApiDesafio.DTOs;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -68,12 +73,13 @@ void MapRoutes(WebApplication app)
 
 void MapRoutesHTTPPost(WebApplication app)
 {
-    app.MapPost("/clientes", () => 
+    app.MapPost("/clientes", ([FromBody] ClienteDTO cliente) => 
     {
-       return new {Mensagem = "Bem vindo a Api"};
+       return Results.Created($"/cliente/{cliente.Id}", cliente);
     })
-    .Produces<dynamic>(StatusCodes.Status200OK)
-    .WithName("Home")
+    .Produces<dynamic>(StatusCodes.Status201Created)
+    .Produces<Error>(StatusCodes.Status400BadRequest)
+    .WithName("PostClientes")
     .WithTags("Testes");
 }
 
