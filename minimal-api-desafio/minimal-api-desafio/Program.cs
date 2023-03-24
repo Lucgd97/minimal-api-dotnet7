@@ -29,7 +29,7 @@ app.MapControllers();
 
 MapRoutes(app);
 
-MapRoutesHTTPPost(app);
+MapRoutesClientes(app);
 
 app.Run();
 
@@ -71,16 +71,43 @@ void MapRoutes(WebApplication app)
     .WithTags("Testes");
 }
 
-void MapRoutesHTTPPost(WebApplication app)
+void MapRoutesClientes(WebApplication app) 
 {
-    app.MapPost("/clientes", ([FromBody] ClienteDTO cliente) => 
+    // rota post
+    app.MapPost("/clientes", ([FromBody] ClienteDTO clienteDTO) => 
     {
-       return Results.Created($"/cliente/{cliente.Id}", cliente);
+        var cliente = new Cliente
+        {
+            Nome = clienteDTO.Nome,
+            Telefone = clienteDTO.Telefone,
+            Email = clienteDTO.Email,
+        };
+        // cliente.salvar(cliente)
+
+        return Results.Created($"/cliente/{cliente.Id}", cliente);
     })
     .Produces<dynamic>(StatusCodes.Status201Created)
     .Produces<Error>(StatusCodes.Status400BadRequest)
     .WithName("PostClientes")
-    .WithTags("Testes");
+    .WithTags("Clientes");
+
+    // rota put - alterar
+    app.MapPut("/clientes/{id}", ([FromRoute] int id, [FromBody] ClienteDTO clienteDTO) => 
+    {
+        var cliente = new Cliente
+        {
+            Nome = clienteDTO.Nome,
+            Telefone = clienteDTO.Telefone,
+            Email = clienteDTO.Email,
+        };
+        // cliente.salvar(cliente)
+
+        return Results.Created($"/cliente/{cliente.Id}", cliente);
+    })
+    .Produces<dynamic>(StatusCodes.Status201Created)
+    .Produces<Error>(StatusCodes.Status400BadRequest)
+    .WithName("PostClientes")
+    .WithTags("Clientes");
 }
 
 #endregion
