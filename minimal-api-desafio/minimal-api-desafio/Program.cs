@@ -111,7 +111,7 @@ void MapRoutesClientes(WebApplication app)
             return Results.BadRequest(new Error
             {
                 Codigo = 123432,
-                Mensagem = "Você passou um cliente inexistente"
+                Mensagem = "Nome é obrigatório"
             });
         }
 
