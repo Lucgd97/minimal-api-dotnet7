@@ -73,6 +73,17 @@ void MapRoutes(WebApplication app)
 
 void MapRoutesClientes(WebApplication app) 
 {
+    // rota Get - retornar informação
+    app.MapGet("/clientes", () => 
+    {
+        var clientes = new List<Cliente>();
+        // var clientes = ClienteService.Todos();
+        return Results.Ok(clientes);
+    })
+    .Produces<Cliente>(StatusCodes.Status200OK)
+    .WithName("GetClientes")
+    .WithTags("Clientes");
+
     // rota post
     app.MapPost("/clientes", ([FromBody] ClienteDTO clienteDTO) => 
     {
@@ -94,19 +105,33 @@ void MapRoutesClientes(WebApplication app)
     // rota put - alterar
     app.MapPut("/clientes/{id}", ([FromRoute] int id, [FromBody] ClienteDTO clienteDTO) => 
     {
-        var cliente = new Cliente
-        {
-            Nome = clienteDTO.Nome,
-            Telefone = clienteDTO.Telefone,
-            Email = clienteDTO.Email,
-        };
-        // cliente.salvar(cliente)
 
-        return Results.Created($"/cliente/{cliente.Id}", cliente);
+        if(!string.IsNullOrEmpty(clienteDTO.Nome))
+        {
+            return Results.BadRequest(new Error
+            {
+                Codigo = 123432,
+                Mensagem = "Você passou um cliente inexistente"
+            });
+        }
+
+        /*var cliente = ClienteService.BuscarPorId(id);
+        if(cliente == null)
+            return Results.NotFound(new Error {Codigo = 123432, Mensagem = "Você passou um cliente inexistente"});
+
+        cliente.Nome = clienteDTO.Nome;
+        cliente.Telefone = clienteDTO.Telefone;
+        cliente.Email = clienteDTO.Email;
+        ClienteService.Update(cliente);*/    
+
+        var cliente = new Cliente();
+       
+        return Results.Ok(cliente);
     })
-    .Produces<dynamic>(StatusCodes.Status201Created)
+    .Produces<Cliente>(StatusCodes.Status200OK)
+    .Produces<Error>(StatusCodes.Status404NotFound)
     .Produces<Error>(StatusCodes.Status400BadRequest)
-    .WithName("PostClientes")
+    .WithName("PutClientes")
     .WithTags("Clientes");
 }
 
