@@ -10,6 +10,8 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("minimal-api-desafio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "c:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-api-dotnet7\\mini" +
+    "mal-api-desafio\\API\\minimal-api-desafio", "minimal-api-desafio.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("api.test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
