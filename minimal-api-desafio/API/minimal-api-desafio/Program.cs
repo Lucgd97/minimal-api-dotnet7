@@ -1,7 +1,18 @@
-using Microsoft.AspNetCore.Mvc;
-using MinimalApiDesafio.ModelViews;
-using MinimalApiDesafio.Models;
-using MinimalApiDesafio.DTOs;
+
+IHostBuilder CreateHostBuilder(string[] args)
+{
+    return Host.CreateDefaultBuilder(args)
+        .ConfigureWebHostDefaults(WebHostBuilder =>
+        {
+            WebHostBuilder.UseStartup<Startup>();
+        });
+}
+
+CreateHostBuilder(args).Build().Run();
+
+
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
