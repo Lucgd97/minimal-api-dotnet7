@@ -10,14 +10,20 @@ public class HomeResquestTest
 {
     public const string PORT = "5001";
     public const string HOST = "http://localhost"; 
-    private static TestContext _testContext;
-    private static WebApplicationFactory<Startup> _http;
+    private static TestContext _testContext = default!;
+    private static WebApplicationFactory<Startup> _http = default!;
 
     [ClassInitialize]
     public static void ClassInit(TestContext testContext)
     {
         _testContext = testContext;
         _http = new WebApplicationFactory<Startup>();
+    }
+
+    [ClassCleanup]
+    public static void ClassCleanup() 
+    {
+        _http.Dispose();
     }
 
     [TestMethod]
@@ -29,9 +35,9 @@ public class HomeResquestTest
             builder.UseSetting("https_port", PORT).UseEnvironment("Testing");
         });
 
-        var cli = _http.CreateClient();
-        var request = await cli.GetAsync($"{HOST}:{PORT}");
+        var client = _http.CreateClient();
+        var response = await client.GetAsync("/");
 
-        Assert.AreEqual(HttpStatusCode.OK, request.StatusCode);
+        Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
     }
 }
