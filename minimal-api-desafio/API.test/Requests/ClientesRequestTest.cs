@@ -7,9 +7,9 @@ using MinimalApiDesafio;
 namespace API.test.Requests;
 
 [TestClass]
-public class HomeResquestTest
-{   
-
+public class ClientesResquestTest
+{
+    
     [ClassInitialize]
     public static void ClassInit(TestContext testContext)
     {
