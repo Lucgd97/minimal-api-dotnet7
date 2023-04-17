@@ -23,26 +23,16 @@ public class ClientesResquestTest
     }
 
     [TestMethod]
-    public async Task TestaSeAHomeDaAPIExiste()
+    public async Task RotaClientes()
     {
-        var response = await Setup.client.GetAsync("/");
+        var response = await Setup.client.GetAsync("/clientes");
 
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         Assert.AreEqual("application/json; charset=utf-8", response.Content.Headers.ContentType?.ToString());
 
         var result = await response.Content.ReadAsStringAsync();
-        Assert.AreEqual("""{"mensagem":"Bem vindo a API"}""", result);
+        Assert.AreEqual("""[]""", result);
     }
 
-    [TestMethod]
-    public async Task TestandoCaminhoFelizParaReceberParametro()
-    {
-        var response = await Setup.client.GetAsync("/recebe-parametro?nome=Leandro");
-
-        Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
-        Assert.AreEqual("application/json; charset=utf-8", response.Content.Headers.ContentType?.ToString());
-
-        var result = await response.Content.ReadAsStringAsync();
-        Assert.AreEqual("""{"parametroPassado":"Alterando parametro recevido Leandro","mensagem":"Muito bem alunos passamos um parametro por querystring"}""", result);
-    }
+    
 }

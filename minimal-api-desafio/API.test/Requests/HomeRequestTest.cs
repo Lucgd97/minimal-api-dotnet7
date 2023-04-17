@@ -45,4 +45,14 @@ public class HomeResquestTest
         var result = await response.Content.ReadAsStringAsync();
         Assert.AreEqual("""{"parametroPassado":"Alterando parametro recevido Leandro","mensagem":"Muito bem alunos passamos um parametro por querystring"}""", result);
     }
+
+    [TestMethod]
+    public async Task TestandoParaReceberParametroSemOParametro()
+    {
+        var response = await Setup.client.GetAsync("/recebe-parametro");
+        Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);    
+
+        var result = await response.Content.ReadAsStringAsync();
+        Assert.AreEqual("""{"mensagem":"Olha você não mandou uma informação importante, o nome é obrigátorio"}""", result);   
+    }
 }
