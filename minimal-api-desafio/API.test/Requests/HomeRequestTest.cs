@@ -47,7 +47,7 @@ public class HomeResquestTest
     }
 
     [TestMethod]
-    public async Task TestandoParaReceberParametroSemOParametro()
+    public async Task TestandoRecebeParametroSemOParametro()
     {
         var response = await Setup.client.GetAsync("/recebe-parametro");
         Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);    

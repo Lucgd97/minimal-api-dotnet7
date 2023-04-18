@@ -23,9 +23,33 @@ public class ClientesResquestTest
     }
 
     [TestMethod]
-    public async Task RotaClientes()
+    public async Task GetClientes()
     {
         var response = await Setup.client.GetAsync("/clientes");
+
+        Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        Assert.AreEqual("application/json; charset=utf-8", response.Content.Headers.ContentType?.ToString());
+
+        var result = await response.Content.ReadAsStringAsync();
+        Assert.AreEqual("""[]""", result);
+    }
+
+    [TestMethod]
+    public async Task PostClientes()
+    {
+        var response = await Setup.client.PostAsync("/clientes");
+
+        Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        Assert.AreEqual("application/json; charset=utf-8", response.Content.Headers.ContentType?.ToString());
+
+        var result = await response.Content.ReadAsStringAsync();
+        Assert.AreEqual("""[]""", result);
+    }
+
+    [TestMethod]
+    public async Task PutClientes()
+    {
+        var response = await Setup.client.PostAsync("/clientes");
 
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         Assert.AreEqual("application/json; charset=utf-8", response.Content.Headers.ContentType?.ToString());
