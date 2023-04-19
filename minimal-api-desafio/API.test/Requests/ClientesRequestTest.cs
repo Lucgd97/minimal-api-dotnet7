@@ -126,5 +126,35 @@ public class ClientesResquestTest
         Assert.AreEqual("""{"codigo":123432,"mensagem":"O Nome é obrigatório"}""", result);
     }
 
+    [TestMethod]
+    public async Task DeleteClientes()
+    {
+        var response = await Setup.client.DeleteAsync($"/clientes/{1}");
+        Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);
+    }
+
+    [TestMethod]
+    public async Task DeleteClientesIdNaoExistente()
+    {
+        var response = await Setup.client.DeleteAsync($"/clientes/{4}");
+        Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [TestMethod]
+    public async Task PatchClientesId()
+    {
+        await SetHeaderToken();
+        var cliente = new ClienteNomeDTO()
+        {
+            Nome = "Jaziel"
+        };
+
+        var content = new StringContent(JsonSerializer.Serialize(cliente), Encoding.UTF8, "application/json");
+        var response = await Setup.client.PatchAsync($"/clientes/{1}", content);
+
+        Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        Assert.AreEqual("application/json; charset=utf-8", response.Content.Headers.ContentType?.ToString());
+    }
+
     
 }
