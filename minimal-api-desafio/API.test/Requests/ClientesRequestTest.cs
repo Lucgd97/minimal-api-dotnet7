@@ -141,7 +141,7 @@ public class ClientesResquestTest
     }
 
     [TestMethod]
-    public async Task PatchClientesId()
+    public async Task PatchClientes()
     {
         await SetHeaderToken();
         var cliente = new ClienteNomeDTO()
@@ -154,6 +154,9 @@ public class ClientesResquestTest
 
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         Assert.AreEqual("application/json; charset=utf-8", response.Content.Headers.ContentType?.ToString());
+
+        var result = await response.Content.ReadAsStringAsync();
+        Assert.AreEqual("""{"codigo":123,"mensagem":"O Nome é obrigatório"}""", result);
     }
 
     
