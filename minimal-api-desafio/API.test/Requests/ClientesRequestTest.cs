@@ -141,6 +141,20 @@ public class ClientesResquestTest
     }
 
     [TestMethod]
+    public async Task GetPorIdClienteNaoEncontrado()
+    {
+        var response = await Setup.client.GetAsync($"/clientes/{1}");
+        Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [TestMethod]
+    public async Task GetPorId()
+    {
+        var response = await Setup.client.GetAsync($"/clientes/{1}");
+        Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+    }
+
+    [TestMethod]
     public async Task PatchClientes()
     {
         await SetHeaderToken();
