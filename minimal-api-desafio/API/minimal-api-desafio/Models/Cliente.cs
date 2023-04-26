@@ -15,11 +15,15 @@ public record Cliente
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id {get; set;}
 
-    public string Nome {get; set;} = default!;
+    [Required]
+    [MaxLength(100)]
+    public string? Nome {get; set;} 
 
+    [Required]
     [MaxLength(20)]
-    public string Telefone {get; set;} = default!;
+    public string? Telefone {get; set;} 
 
+    [MaxLength(200)]
     public string? Email {get; set;}
     
     public DateTime DataCriacao { get;set; }
